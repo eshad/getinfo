@@ -13,7 +13,33 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 #------------- partial commands-----------------
-    
+#------------------------ DB Connection ---------
+def create_connection(db_file):
+    """ create a database connection to the SQLite database
+        specified by db_file
+    :param db_file: database file
+    :return: Connection object or None
+    """
+    conn = None
+    try:
+        conn = sqlite3.connect(db_file)
+    except Error as e:
+        print(e)
+
+    return conn   
+#----------------------------------
+
+#------------ Insert sqlite --------------
+
+#------------------------------------------
+
+def head():
+    header = "▁▁▁▁▁▁▁▁▁▁▁▁▁ TARGET LIST ▁▁▁▁▁▁▁▁▁▁▁▁▁ \n";
+    intro = 'Welcome to the ESH4D shell.   Type help or ? to list commands.\n'
+    intro += "▭▭▭▭▭▭▭▭▭▭▭▭ ▭▭▭▭▭▭▭▭▭▭▭▭▭▭ ▭▭▭▭▭▭▭▭▭▭▭▭▭ ▭▭▭▭▭▭▭▭▭▭▭▭▭"
+    print(bcolors.HEADER + header);
+    print (bcolors.HEADER + intro);
+
 def add():
     print (bcolors.BOLD + "******** Person Details **************\n");
     print (bcolors.UNDERLINE);
@@ -24,8 +50,9 @@ def add():
         firstname = names[0];
         lastname= names[1];
     except:
-        if names[1] is None:
+        if (len(names) <= 1):
             lastname = 'NULL';
+
     gender = raw_input("?Gender: ");
     dob = raw_input("?Date: ");
     marital_status = raw_input("?Un/Married: ");
@@ -41,7 +68,8 @@ def add():
     sibling = raw_input("?Siblings(number): ");
     
     os.system('clear');
-
+   
+    head();
 #-----------------------------------------------
 
 class GetInfoShell(cmd.Cmd):
@@ -67,7 +95,7 @@ class GetInfoShell(cmd.Cmd):
 	print (bcolors.WARNING + "Bye...")
 	exit()
 def main():
-	header = "▁▁▁▁▁▁▁▁▁▁▁▁▁ TARGET LIST ▁▁▁▁▁▁▁▁▁▁▁▁▁ ";
+	header = "▁▁▁▁▁▁▁▁▁▁▁▁▁ TARGET LIST ▁▁▁▁▁▁▁▁▁▁▁▁▁ \n";
 	print(bcolors.HEADER + header)
 	GetInfoShell().cmdloop();
 
