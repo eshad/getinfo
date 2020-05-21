@@ -1,4 +1,4 @@
-#!/bin/python
+#!/bin/python2
 # -*- coding: utf-8 -*-			#To enable non ascii cherecters
 
 import cmd, sys, os
@@ -30,6 +30,8 @@ def create_connection(db_file):
 #----------------------------------
 
 #------------ Insert sqlite --------------
+def insert(info):
+    cnn = create_connection("getinfo.db");
 
 #------------------------------------------
 
@@ -66,6 +68,7 @@ def add():
     mother = raw_input("?Mother: ");
     father = raw_input("?Father: ");
     sibling = raw_input("?Siblings(number): ");
+    
     
     os.system('clear');
    
